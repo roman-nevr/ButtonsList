@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+        android:text="Row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="37dp"
+        android:id="@+id/row"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:id="@+id/row_number"
+        android:layout_alignBaseline="@+id/row"
+        android:layout_alignBottom="@+id/row"
+        android:layout_toRightOf="@+id/row"
+        android:layout_toEndOf="@+id/row"/>
+
+    <TextView
+        android:text="% (0...1)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fill_percent"
+        android:layout_below="@+id/row_number"
+        android:layout_toLeftOf="@+id/row_number"
+        android:layout_toStartOf="@+id/row_number"
+        android:layout_marginTop="29dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_alignBaseline="@+id/fill_percent"
+        android:layout_alignBottom="@+id/fill_percent"
+        android:layout_alignLeft="@+id/row_number"
+        android:layout_alignStart="@+id/row_number"/>
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText2"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2"
+        android:id="@+id/button2"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/history_list"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button2">
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>
