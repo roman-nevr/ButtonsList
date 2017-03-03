@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 
 public class FilledButton extends android.support.v7.widget.AppCompatTextView {
@@ -40,11 +39,11 @@ public class FilledButton extends android.support.v7.widget.AppCompatTextView {
         text = "";
         fill = 0.3f;
         this.setText(text);
+        this.setPadding(30, 30, 30, 30);
     }
 
     @Override protected void onDraw(Canvas canvas) {
         canvas.drawRect(0,0, getWidth()*fill, getHeight(), fillPaint);
-        //canvas.drawText("But", getWidth() / 2, getHeight() / 2, textPaint);
         super.onDraw(canvas);
     }
 
