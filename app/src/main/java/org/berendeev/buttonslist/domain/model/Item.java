@@ -1,4 +1,4 @@
-package org.berendeev.buttonslist.domain;
+package org.berendeev.buttonslist.domain.model;
 
 public class Item {
     private int number;
@@ -42,5 +42,9 @@ public class Item {
         public Item build(){
             return new Item(number, fill);
         }
+    }
+
+    @Override public String toString() {
+        return "Item(" + number + ", " + fill + ")";
     }
 }

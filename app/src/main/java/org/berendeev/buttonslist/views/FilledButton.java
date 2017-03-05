@@ -4,15 +4,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
 
 
 public class FilledButton extends android.support.v7.widget.AppCompatTextView {
 
     private float fill;
-    private Paint fillPaint;
+    private Paint fillPaint, textPaint, linePaint;
     private String text;
-    private Paint textPaint;
+    private Path path;
 
     public FilledButton(Context context) {
         super(context);
@@ -40,10 +41,21 @@ public class FilledButton extends android.support.v7.widget.AppCompatTextView {
         fill = 0.3f;
         this.setText(text);
         this.setPadding(30, 30, 30, 30);
+        linePaint = new Paint();
+        linePaint.setColor(Color.GREEN);
+        linePaint.setStrokeWidth(2f);
+        linePaint.setStyle(Paint.Style.STROKE);
+        path = new Path();
     }
 
     @Override protected void onDraw(Canvas canvas) {
         canvas.drawRect(0,0, getWidth()*fill, getHeight(), fillPaint);
+        path.reset();
+        path.lineTo(getWidth(), 0);
+        path.lineTo(getWidth(), getHeight());
+        path.lineTo(0, getHeight());
+        path.close();
+        canvas.drawPath(path, linePaint);
         super.onDraw(canvas);
     }
 

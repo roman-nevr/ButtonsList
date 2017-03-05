@@ -1,4 +1,4 @@
-package org.berendeev.buttonslist.domain;
+package org.berendeev.buttonslist.domain.interactor;
 
 
 public abstract class Interactor<T, P> {
@@ -21,7 +21,7 @@ public abstract class Interactor<T, P> {
 
     protected abstract void operation(T requestValue, Callback<P> callback);
 
-    interface Callback<P> {
+    public interface Callback<P> {
         void onSuccess(P responseValue);
 
         void onError(Throwable t);

@@ -5,7 +5,7 @@
               android:layout_height="wrap_content">
 
     <org.berendeev.buttonslist.views.FilledButton
-        android:id="@+id/button"
+        android:id="@+id/filled_button"
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,11 +17,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text = "Text"
+        android:id="@+id/label"
         android:textSize="24dp"
         android:layout_marginLeft="8dp"
         android:layout_centerVertical="true"
-        android:layout_alignBaseline="@+id/button"
-        android:layout_alignBottom="@+id/button"
+        android:layout_alignBaseline="@+id/filled_button"
+        android:layout_alignBottom="@+id/filled_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 </RelativeLayout>
