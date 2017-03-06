@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import org.berendeev.buttonslist.R;
 import org.berendeev.buttonslist.domain.model.Item;
-import org.berendeev.buttonslist.presentation.ButtonsListPresenter;
+import org.berendeev.buttonslist.presentation.OnItemClick;
 import org.berendeev.buttonslist.views.FilledButton;
 
 import java.util.List;
@@ -18,9 +18,9 @@ import java.util.List;
 public class ButtonsListAdapter extends Adapter<ButtonsListAdapter.ButtonsHolder> {
 
     private List<Item> items;
-    private ButtonsListPresenter presenter;
+    private OnItemClick presenter;
 
-    public ButtonsListAdapter(List<Item> items, ButtonsListPresenter presenter) {
+    public ButtonsListAdapter(List<Item> items, OnItemClick presenter) {
         this.items = items;
         this.presenter = presenter;
     }
@@ -32,7 +32,7 @@ public class ButtonsListAdapter extends Adapter<ButtonsListAdapter.ButtonsHolder
             @Override public void onClick(View v) {
                 int adapterPosition = holder.getAdapterPosition();
                 if(adapterPosition != RecyclerView.NO_POSITION){
-                    presenter.onItemClick(holder.getAdapterPosition());
+                    presenter.onClick(holder.getAdapterPosition());
                 }
 
             }
@@ -52,6 +52,11 @@ public class ButtonsListAdapter extends Adapter<ButtonsListAdapter.ButtonsHolder
     public void setItems(List<Item> items){
         this.items = items;
         notifyDataSetChanged();
+    }
+
+    public void addItem(Item item){
+        items.add(item);
+        notifyItemInserted(items.size() - 1);
     }
 
     public static class ButtonsHolder extends RecyclerView.ViewHolder{

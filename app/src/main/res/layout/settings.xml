@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:text="Row"
@@ -32,7 +33,7 @@
         android:text="% (0...1)"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fill_percent"
+        android:id="@+id/fill_label"
         android:layout_below="@+id/row_number"
         android:layout_toLeftOf="@+id/row_number"
         android:layout_toStartOf="@+id/row_number"
@@ -43,9 +44,9 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_alignBaseline="@+id/fill_percent"
-        android:layout_alignBottom="@+id/fill_percent"
+        android:id="@+id/fill_percent"
+        android:layout_alignBaseline="@+id/fill_label"
+        android:layout_alignBottom="@+id/fill_label"
         android:layout_alignLeft="@+id/row_number"
         android:layout_alignStart="@+id/row_number"/>
 
@@ -53,19 +54,20 @@
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2"
-        android:id="@+id/button2"/>
+        android:layout_below="@+id/fill_percent"
+        android:layout_alignRight="@+id/fill_percent"
+        android:layout_alignEnd="@+id/fill_percent"
+        android:id="@+id/add_button"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/history_list"
+        app:layoutManager="LinearLayoutManager"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button2">
+        android:layout_below="@+id/add_button">
 
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

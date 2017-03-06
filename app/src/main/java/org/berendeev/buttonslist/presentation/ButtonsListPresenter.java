@@ -5,7 +5,7 @@ import org.berendeev.buttonslist.domain.model.Item;
 
 import java.util.List;
 
-public class ButtonsListPresenter {
+public class ButtonsListPresenter implements OnItemClick{
 
     private ButtonsListView view;
     private ButtonsListView.Router router;
@@ -38,7 +38,11 @@ public class ButtonsListPresenter {
         this.router = router;
     }
 
-    public void onItemClick(int number) {
+    @Override public void onClick(int number) {
         router.showItem(number);
+    }
+
+    public void onSettingsClick() {
+        router.showSettings();
     }
 }
