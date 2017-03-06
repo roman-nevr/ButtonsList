@@ -7,6 +7,7 @@ import org.berendeev.buttonslist.data.datasource.DatabaseDataSource;
 import org.berendeev.buttonslist.data.datasource.DatabaseOpenHelper;
 import org.berendeev.buttonslist.domain.Repository;
 import org.berendeev.buttonslist.domain.interactor.GetHistoryInteractor;
+import org.berendeev.buttonslist.domain.interactor.GetItemInteractor;
 import org.berendeev.buttonslist.domain.interactor.GetListInteractor;
 import org.berendeev.buttonslist.domain.interactor.Interactor;
 import org.berendeev.buttonslist.domain.interactor.InteractorExecutor;
@@ -19,15 +20,18 @@ import java.util.List;
 
 public class Injector {
     public static DatabaseOpenHelper provideDatabaseOpenHelper(Context context){
-        return DatabaseOpenHelper.getInstance(context);
+        Context appContext = context.getApplicationContext();
+        return DatabaseOpenHelper.getInstance(appContext);
     }
 
     public static DatabaseDataSource provideDatabaseDataSource(Context context){
-        return new DatabaseDataSource(provideDatabaseOpenHelper(context));
+        Context appContext = context.getApplicationContext();
+        return new DatabaseDataSource(provideDatabaseOpenHelper(appContext));
     }
 
     public static Repository provideRepository(Context context){
-        return new RepositoryImpl(provideDatabaseDataSource(context));
+        Context appContext = context.getApplicationContext();
+        return new RepositoryImpl(provideDatabaseDataSource(appContext));
     }
 
     public static InteractorExecutor provideWorkInteractorExecutor(){
@@ -39,15 +43,22 @@ public class Injector {
     }
 
     public static Interactor<Void, List<Item>> provideGetListInteractor(Context context){
-        return new GetListInteractor(provideWorkInteractorExecutor(), provideMainThreadInteractorExecutor(), provideRepository(context));
+        Context appContext = context.getApplicationContext();
+        return new GetListInteractor(provideWorkInteractorExecutor(), provideMainThreadInteractorExecutor(), provideRepository(appContext));
     }
 
     public static Interactor<Void, List<Item>> provideGetHistoryInteractor(Context context){
-        return new GetHistoryInteractor(provideWorkInteractorExecutor(), provideMainThreadInteractorExecutor(), provideRepository(context));
+        Context appContext = context.getApplicationContext();
+        return new GetHistoryInteractor(provideWorkInteractorExecutor(), provideMainThreadInteractorExecutor(), provideRepository(appContext));
     }
 
     public static Interactor<Item, Void> provideSaveItemInteractor(Context context){
-        return new SaveItemInteractor(provideWorkInteractorExecutor(), provideMainThreadInteractorExecutor(), provideRepository(context));
+        Context appContext = context.getApplicationContext();
+        return new SaveItemInteractor(provideWorkInteractorExecutor(), provideMainThreadInteractorExecutor(), provideRepository(appContext));
     }
 
+    public static Interactor<Integer, Item> provideGetItemInteractor(Context context){
+        Context appContext = context.getApplicationContext();
+        return new GetItemInteractor(provideWorkInteractorExecutor(), provideMainThreadInteractorExecutor(), provideRepository(appContext));
+    }
 }

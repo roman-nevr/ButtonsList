@@ -2,7 +2,9 @@ package org.berendeev.buttonslist.presentation.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -33,11 +35,19 @@ public class ButtonsListActivity extends AppCompatActivity implements ButtonsLis
     private void initUI() {
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.buttons_list_title);
     }
 
     @Override protected void onStart() {
         super.onStart();
+        presenter.setView(this);
+        presenter.setRouter(this);
         presenter.start();
     }
 
@@ -58,12 +68,12 @@ public class ButtonsListActivity extends AppCompatActivity implements ButtonsLis
 
     }
 
-    @Override public void showSettings() {
+    @Override public void moveToSettings() {
         SettingsActivity.start(this);
     }
 
-    @Override public void showItem(int number) {
-
+    @Override public void moveToDeatils(int number) {
+        DetailsActivity.start(this, number);
     }
 
     @Override
@@ -82,4 +92,11 @@ public class ButtonsListActivity extends AppCompatActivity implements ButtonsLis
             return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override protected void onStop() {
+        super.onStop();
+        presenter.stop();
+    }
+
+
 }

@@ -33,10 +33,11 @@ public class SettingsPresenter implements OnItemClick {
         });
     }
 
-    private void saveItem(Item item){
+    private void saveItem(final Item item){
         saveItemInteractor.executeInteractor(item, new Interactor.Callback<Void>() {
             @Override public void onSuccess(Void responseValue) {
                 //
+                view.addItem(item);
             }
 
             @Override public void onError(Throwable t) {
@@ -53,9 +54,27 @@ public class SettingsPresenter implements OnItemClick {
         try {
             int number = Integer.parseInt(numberString);
             float fill = Float.parseFloat(fillString);
-            saveItem(new Item(number, fill));
+            if(fill >= 0 && fill<=1 && number >=0 && number <100){
+                saveItem(new Item(number, fill));
+            }else {
+                view.showInputError();
+            }
         }catch (NumberFormatException e){
-            view.showError();
+            view.showInputError();
         }
+    }
+
+    public void setView(SettingsView view) {
+        this.view = view;
+    }
+
+    public void setRouter(SettingsView.Router router) {
+        this.router = router;
+    }
+
+    public void stop() {
+        DummyView dummyView = new DummyView();
+        view = dummyView;
+        router = dummyView;
     }
 }

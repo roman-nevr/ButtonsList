@@ -9,7 +9,7 @@ public interface ButtonsListView {
     void showError();
 
     interface Router{
-        void showSettings();
-        void showItem(int number);
+        void moveToSettings();
+        void moveToDeatils(int number);
     }
 }

@@ -39,10 +39,16 @@ public class ButtonsListPresenter implements OnItemClick{
     }
 
     @Override public void onClick(int number) {
-        router.showItem(number);
+        router.moveToDeatils(number);
     }
 
     public void onSettingsClick() {
-        router.showSettings();
+        router.moveToSettings();
+    }
+
+    public void stop() {
+        DummyView dummyView = new DummyView();
+        view = dummyView;
+        router = dummyView;
     }
 }

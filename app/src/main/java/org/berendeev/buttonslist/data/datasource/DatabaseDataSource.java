@@ -13,8 +13,9 @@ import java.util.List;
 import static org.berendeev.buttonslist.data.datasource.DatabaseOpenHelper.COEF;
 import static org.berendeev.buttonslist.data.datasource.DatabaseOpenHelper.DATABASE_TABLE;
 import static org.berendeev.buttonslist.data.datasource.DatabaseOpenHelper.NUMBER;
+import static org.berendeev.buttonslist.domain.Repository.ROWS_NUMBER;
 
-public class DatabaseDataSource implements Datasource {
+public class DatabaseDataSource implements Datasource, Cache{
 
     DatabaseOpenHelper openHelper;
     SQLiteDatabase database;
@@ -34,6 +35,18 @@ public class DatabaseDataSource implements Datasource {
         long rowId = database.insert(DATABASE_TABLE, null, contentValues);
         if(rowId == -1){
             throw new SQLiteDiskIOException("can't write item");
+        }
+    }
+
+    @Override public Item getItem(int number) {
+        String[] columns = {NUMBER, COEF};
+        String selection = NUMBER + " = ?";
+        String[] selectionArgs = {"" + number};
+        Cursor cursor = database.query(true, DATABASE_TABLE, columns, selection, selectionArgs, NUMBER, null, NUMBER + " ASC", null);
+        if(cursor.moveToFirst()){
+            return getItemFromCursor(cursor);
+        }else {
+            return new Item(number, 0f);
         }
     }
 
@@ -72,7 +85,7 @@ public class DatabaseDataSource implements Datasource {
     private List<Item> getFilledListFromCursor(Cursor cursor){
         List<Item> items = new ArrayList<>();
         int i = 0;
-        int max = 5;
+        int max = ROWS_NUMBER;
         Item item = null;
         while (cursor.moveToNext()){
             item = getItemFromCursor(cursor);
@@ -90,4 +103,7 @@ public class DatabaseDataSource implements Datasource {
         return items;
     }
 
+    @Override public void clearCache() {
+        database.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
+    }
 }

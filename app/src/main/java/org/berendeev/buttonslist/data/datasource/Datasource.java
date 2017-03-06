@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface Datasource {
     void saveItem(Item item);
+    Item getItem(int number);
     List<Item> getHistory();
     List<Item> getItems();
 }

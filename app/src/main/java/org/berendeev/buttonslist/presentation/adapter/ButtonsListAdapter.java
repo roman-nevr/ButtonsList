@@ -20,9 +20,9 @@ public class ButtonsListAdapter extends Adapter<ButtonsListAdapter.ButtonsHolder
     private List<Item> items;
     private OnItemClick presenter;
 
-    public ButtonsListAdapter(List<Item> items, OnItemClick presenter) {
+    public ButtonsListAdapter(List<Item> items, OnItemClick onClick) {
         this.items = items;
-        this.presenter = presenter;
+        this.presenter = onClick;
     }
 
     @Override public ButtonsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,7 +32,7 @@ public class ButtonsListAdapter extends Adapter<ButtonsListAdapter.ButtonsHolder
             @Override public void onClick(View v) {
                 int adapterPosition = holder.getAdapterPosition();
                 if(adapterPosition != RecyclerView.NO_POSITION){
-                    presenter.onClick(holder.getAdapterPosition());
+                    presenter.onClick(holder.number);
                 }
 
             }
@@ -43,6 +43,7 @@ public class ButtonsListAdapter extends Adapter<ButtonsListAdapter.ButtonsHolder
     @Override public void onBindViewHolder(ButtonsHolder holder, int position) {
         holder.label.setText("" + items.get(position).getNumber());
         holder.filledButton.setFill(items.get(position).getFill());
+        holder.number = items.get(position).getNumber();
     }
 
     @Override public int getItemCount() {
@@ -63,6 +64,7 @@ public class ButtonsListAdapter extends Adapter<ButtonsListAdapter.ButtonsHolder
 
         private FilledButton filledButton;
         private TextView label;
+        public int number;
         public ButtonsHolder(View itemView) {
             super(itemView);
             filledButton = (FilledButton) itemView.findViewById(R.id.filled_button);

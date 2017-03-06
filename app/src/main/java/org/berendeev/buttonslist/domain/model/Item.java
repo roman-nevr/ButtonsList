@@ -47,4 +47,13 @@ public class Item {
     @Override public String toString() {
         return "Item(" + number + ", " + fill + ")";
     }
+
+    @Override public boolean equals(Object obj) {
+        if(obj != null && obj instanceof Item){
+            Item item = (Item) obj;
+            return (number == item.getNumber() && fill == item.getFill());
+        }else {
+            return false;
+        }
+    }
 }

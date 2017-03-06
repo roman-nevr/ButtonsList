@@ -2,32 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:text="Row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:id="@+id/row"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="35dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="37dp"
-        android:id="@+id/row"/>
+        android:layout_alignLeft="@+id/fill_label"
+        android:layout_alignStart="@+id/fill_label"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:layout_marginLeft="23dp"
-        android:layout_marginStart="23dp"
+        android:imeOptions="actionDone|flagNoExtractUi"
         android:id="@+id/row_number"
         android:layout_alignBaseline="@+id/row"
         android:layout_alignBottom="@+id/row"
-        android:layout_toRightOf="@+id/row"
-        android:layout_toEndOf="@+id/row"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="38dp"
+        android:layout_marginEnd="38dp"/>
 
     <TextView
         android:text="% (0...1)"
@@ -42,8 +42,9 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:ems="10"
+        android:imeOptions="actionDone|flagNoExtractUi"
         android:id="@+id/fill_percent"
         android:layout_alignBaseline="@+id/fill_label"
         android:layout_alignBottom="@+id/fill_label"
@@ -51,10 +52,11 @@
         android:layout_alignStart="@+id/row_number"/>
 
     <Button
-        android:text="Button"
+        android:text="Ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fill_percent"
+        android:layout_marginTop="8dp"
         android:layout_alignRight="@+id/fill_percent"
         android:layout_alignEnd="@+id/fill_percent"
         android:id="@+id/add_button"/>
@@ -63,7 +65,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/history_list"
+        tools:listitem="@layout/list_item"
         app:layoutManager="LinearLayoutManager"
+        android:layout_marginTop="8dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

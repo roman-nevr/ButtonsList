@@ -19,6 +19,10 @@ public class RepositoryImpl implements Repository {
         datasource.saveItem(item);
     }
 
+    @Override public Item getItem(int number) {
+        return datasource.getItem(number);
+    }
+
     @Override public List<Item> getHistory() {
         return datasource.getHistory();
     }
