@@ -38,6 +38,7 @@ public class SettingsPresenter implements OnItemClick {
             @Override public void onSuccess(Void responseValue) {
                 //
                 view.addItem(item);
+                view.clearInputFields();
             }
 
             @Override public void onError(Throwable t) {
